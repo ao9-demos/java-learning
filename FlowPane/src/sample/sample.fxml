@@ -1,0 +1,26 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.TilePane?>
+<TilePane fx:controller="sample.Controller"
+          xmlns:fx="http://javafx.com/fxml">
+
+
+    <Button text="button 1" style="-fx-background-color: red"/>
+    <Button text="button 2"/>
+    <Button text="button 3"/>
+    <Button text="button 4"/>
+    <Button text="button 5"/>
+    <Button text="button 6"/>
+    <Button text="button 7"/>
+    <Button text="button 8"/>
+    <Button text="button 9"/>
+    <Button text="button 10"/>
+
+
+
+
+</TilePane>

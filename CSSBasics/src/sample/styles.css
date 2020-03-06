@@ -1,0 +1,9 @@
+.button {
+-fx-background-color: darkgrey;
+-fx-text-fill: white;
+}
+
+#button3 {
+-fx-background-color: darkblue;
+-fx-text-fill: white;
+}

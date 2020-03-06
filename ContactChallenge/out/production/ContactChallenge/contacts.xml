@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contacts>
+<contact>
+	<first_name>A</first_name>
+	<last_name>D</last_name>
+	<phone_number>222</phone_number>
+	<notes>ddd</notes>
+</contact>
+<contact>
+	<first_name>Shan</first_name>
+	<last_name>Ruan</last_name>
+	<phone_number>1232323</phone_number>
+	<notes>abdg</notes>
+</contact>
+<contact>
+	<first_name>2</first_name>
+	<last_name>2</last_name>
+	<phone_number>2</phone_number>
+	<notes>2</notes>
+</contact>
+</contacts>
