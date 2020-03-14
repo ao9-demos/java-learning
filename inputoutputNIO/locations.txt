@@ -1,0 +1,7 @@
+0,in front of your computer
+1,on a road
+2,on the top of a hill
+3,inside a building
+4,at the bottom of a valley
+5,in a forest
+6,at a dead end

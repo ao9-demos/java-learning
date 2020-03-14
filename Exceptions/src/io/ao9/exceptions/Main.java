@@ -1,24 +1,31 @@
 package io.ao9.exceptions;
 
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        int x = getInt();
-        int y = getInt();
-        System.out.println(devide(x, y));
+        try {
+            System.out.println(divide());
+        } catch (ArithmeticException | NoSuchElementException e) {
+            System.out.println(e.toString());
+            System.out.println("Cannot perform the divide");;
+        }
     }
 
-    private static int devide(int x, int y) {
-        System.out.println("x is " + x + ", y is " + y);
-        try {
+    private static int divide() {
+//        try {
+            int x = getInt();
+            int y = getInt();
+            System.out.println("x is " + x + ", y is " + y);
             return x / y;
-        } catch (ArithmeticException e) {
-            System.out.println("Cannot / by zero, returned 0 as result");
-            return 0;
-        }
+//        } catch (ArithmeticException e) {
+//            throw new ArithmeticException("cannot / by 0");
+//        } catch (NoSuchElementException e) {
+//            throw new ArithmeticException("No such element");
+//        }
     }
 
     private static int getInt() {
