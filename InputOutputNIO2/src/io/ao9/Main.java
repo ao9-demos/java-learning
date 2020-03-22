@@ -19,35 +19,67 @@ public class Main {
         try (FileOutputStream binFile = new FileOutputStream("data.dat");
              FileChannel binChannel = binFile.getChannel();
              RandomAccessFile ra = new RandomAccessFile("data.dat", "rwd");
-             FileChannel channel = ra.getChannel()) {
+             FileChannel channel = ra.getChannel();
+             RandomAccessFile copyFile = new RandomAccessFile("copydata.dat", "rw");
+             FileChannel copyChannel = copyFile.getChannel()) {
 
             //write to buffer
             ByteBuffer writeBuffer = ByteBuffer.allocate(100);
             byte[] outputBytes1 = "Hello World!".getBytes();
             byte[] outputBytes2 = "Nice to meet you!".getBytes();
-            writeBuffer.put(outputBytes1).putInt(666).putInt(888).put(outputBytes2).putInt(999);
-//            writeBuffer.putInt(666);
-//            writeBuffer.putInt(888);
-//            writeBuffer.put(outputBytes2);
-//            writeBuffer.putInt(999);
+//            writeBuffer.put(outputBytes1).putInt(666).putInt(888).put(outputBytes2).putInt(999);
+            writeBuffer.put(outputBytes1);
+            long int1Pos = outputBytes1.length;
+            writeBuffer.putInt(666);
+            long int2Pos = int1Pos + Integer.BYTES;
+            writeBuffer.putInt(888);
+            writeBuffer.put(outputBytes2);
+            long int3Pos = int2Pos + Integer.BYTES + outputBytes2.length;
+            writeBuffer.putInt(999);
             //use channel to read from buffer, and write to file
             writeBuffer.flip();
             binChannel.write(writeBuffer);
 
-            ByteBuffer readBuffer = ByteBuffer.allocate(100);
-            //use channel to read from file, and write to buffer
+
+            ByteBuffer readBuffer = ByteBuffer.allocate(Integer.BYTES);
+
+            channel.position(int3Pos);
             channel.read(readBuffer);
             readBuffer.flip();
-            //read from buffer
-            byte[] inputBytes1 = new byte[outputBytes1.length];
-            readBuffer.get(inputBytes1);
-            System.out.println("new String(inputBytes1) = " + new String(inputBytes1));
             System.out.println("readBuffer.getInt() = " + readBuffer.getInt());
+            readBuffer.flip();
+
+            channel.position(int2Pos);
+            channel.read(readBuffer);
+            readBuffer.flip();
             System.out.println("readBuffer.getInt() = " + readBuffer.getInt());
-            byte[] inputBytes2 = new byte[outputBytes2.length];
-            readBuffer.get(inputBytes2);
-            System.out.println("new String(inputBytes2) = " + new String(inputBytes2));
+            readBuffer.flip();
+
+            channel.position(int1Pos);
+            channel.read(readBuffer);
+            readBuffer.flip();
             System.out.println("readBuffer.getInt() = " + readBuffer.getInt());
+            readBuffer.flip();
+
+            channel.position(0);
+//            long numTransferred = copyChannel.transferFrom(channel,0, channel.size());
+            long numTransferred = channel.transferTo(0, channel.size(), copyChannel);
+            System.out.println("numTransferred = " + numTransferred);
+
+//            ByteBuffer readBuffer = ByteBuffer.allocate(100);
+//            //use channel to read from file, and write to buffer
+//            channel.read(readBuffer);
+//            readBuffer.flip();
+//            //read from buffer
+//            byte[] inputBytes1 = new byte[outputBytes1.length];
+//            readBuffer.get(inputBytes1);
+//            System.out.println("new String(inputBytes1) = " + new String(inputBytes1));
+//            System.out.println("readBuffer.getInt() = " + readBuffer.getInt());
+//            System.out.println("readBuffer.getInt() = " + readBuffer.getInt());
+//            byte[] inputBytes2 = new byte[outputBytes2.length];
+//            readBuffer.get(inputBytes2);
+//            System.out.println("new String(inputBytes2) = " + new String(inputBytes2));
+//            System.out.println("readBuffer.getInt() = " + readBuffer.getInt());
 
 
 //            byte[] outputBytes = "Hello World!".getBytes();
